@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popa Catalin-Alexandru</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon"
+          href="https://lh3.googleusercontent.com/ogw/ADea4I6JLvUvNYFZ2QQyYFSPKCA4ow1Zqy2J5-riuhTO=s32-c-mo">
+    <style>
+        /*=============== GOOGLE FONTS ===============*/
+        @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+
+        /*=============== VARIABLES CSS ===============*/
+        :root {
+            --header-height: 3rem;
+
+            /*========== Colors ==========*/
+            --hue: 174;
+            --sat: 63%;
+            --first-color: hsl(var(--hue), var(--sat), 40%);
+            --first-color-alt: hsl(var(--hue), var(--sat), 36%);
+            --title-color: hsl(var(--hue), 12%, 15%);
+            --text-color: hsl(var(--hue), 8%, 35%);
+            --body-color: hsl(var(--hue), 100%, 99%);
+            --container-color: #FFF;
+
+            /*========== Font and typography ==========*/
+            --body-font: 'Open Sans', sans-serif;
+            --h1-font-size: 1.5rem;
+            --normal-font-size: .938rem;
+            --tiny-font-size: .625rem;
+
+            /*========== z index ==========*/
+            --z-tooltip: 10;
+            --z-fixed: 100;
+        }
+
+        @media screen and (min-width: 968px) {
+            :root {
+                --h1-font-size: 2.25rem;
+                --normal-font-size: 1rem;
+            }
+        }
+
+        /*=============== BASE ===============*/
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: var(--header-height) 0 0 0;
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            background-color: var(--body-color);
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        P {
+            margin: 5px;
+            padding: 5px;
+        }
+
+        button {
+            margin: 10px;
+            padding: 5px;
+        }
+
+        label {
+            text-align: center;
+        }
+
+        /*=============== REUSABLE CSS CLASSES ===============*/
+        .section {
+            padding: 4.5rem 0 2rem;
+        }
+
+        .section__title {
+            font-size: var(--h1-font-size);
+            color: var(--title-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section__height {
+            height: 100vh;
+        }
+
+        /*=============== LAYOUT ===============*/
+        .container {
+            max-width: 968px;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .content {
+            border: 2px solid;
+            border-radius: 20px;
+            box-shadow: 2px 3px 2px 3px #808080;
+        }
+
+             .text-format {
+                        text-align: center;
+                        margin: 10px;
+                        padding: 5px;
+                        width: 100%;
+                    }
+
+        /*=============== HEADER ===============*/
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--container-color);
+            z-index: var(--z-fixed);
+            transition: .4s;
+        }
+
+        /*=============== NAV ===============*/
+        .nav {
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav__img {
+            width: 32px;
+            border-radius: 50%;
+        }
+
+        .nav__logo {
+            color: var(--title-color);
+            font-weight: 600;
+        }
+
+        @media screen and (max-width: 767px) {
+            .nav__menu {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                background-color: var(--container-color);
+                box-shadow: 0 -1px 12px hsla(var(--hue), var(--sat), 15%, 0.15);
+                width: 100%;
+                height: 4rem;
+                padding: 0 1rem;
+                display: grid;
+                align-content: center;
+                border-radius: 1.25rem 1.25rem 0 0;
+                transition: .4s;
+            }
+        }
+
+        /*=============== TABLE ===============*/
+        table.blueTable {
+            border: 1px solid #1C6EA4;
+            background-color: #EEEEEE;
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        table.blueTable td,
+        table.blueTable th {
+            border: 1px solid #AAAAAA;
+            padding: 3px 2px;
+            text-align: center;
+        }
+
+        table.blueTable tbody td {
+            font-size: 13px;
+        }
+
+        table.blueTable tr:nth-child(even) {
+            background: #D0E4F5;
+        }
+
+        table.blueTable thead {
+            background: #1C6EA4;
+            background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+            background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+            background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+            border-bottom: 2px solid #444444;
+        }
+
+        table.blueTable thead th {
+            font-size: 15px;
+            font-weight: bold;
+            color: #FFFFFF;
+            border-left: 2px solid #D0E4F5;
+        }
+
+        table.blueTable thead th:first-child {
+            border-left: none;
+        }
+
+        .nav__list,
+        .nav__link {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav__link {
+            flex-direction: column;
+            align-items: center;
+            row-gap: 4px;
+            color: var(--title-color);
+            font-weight: 600;
+        }
+
+        .nav__list {
+            justify-content: space-around;
+        }
+
+        .nav__name {
+            font-size: var(--tiny-font-size);
+            /* display: none;*/
+            /* Minimalist design, hidden labels */
+        }
+
+        .nav__icon {
+            font-size: 1.5rem;
+        }
+
+        /*Active link*/
+        .active-link {
+            position: relative;
+            color: var(--first-color);
+            transition: .3s;
+        }
+
+        /* Change background header */
+        .scroll-header {
+            box-shadow: 0 1px 12px hsla(var(--hue), var(--sat), 15%, 0.15);
+        }
+
+        /*=============== MEDIA QUERIES ===============*/
+        /* For small devices */
+        /* Remove if you choose, the minimalist design */
+        @media screen and (max-width: 320px) {
+            .nav__name {
+                display: none;
+            }
+        }
+
+        /* For medium devices */
+        @media screen and (min-width: 576px) {
+            .nav__list {
+                justify-content: center;
+                column-gap: 3rem;
+            }
+        }
+
+        @media screen and (min-width: 767px) {
+            body {
+                margin: 0;
+            }
+
+            .section {
+                padding: 7rem 0 2rem;
+            }
+
+            .nav {
+                height: calc(var(--header-height) + 1.5rem);
+                /* 4.5rem */
+            }
+
+            .nav__img {
+                display: none;
+            }
+
+            .nav__icon {
+                display: none;
+            }
+
+            .nav__name {
+                font-size: var(--normal-font-size);
+                /* display: block; */
+                /* Minimalist design, visible labels */
+            }
+
+            .nav__link:hover {
+                color: var(--first-color);
+            }
+
+            /* First design, remove if you choose the minimalist design */
+            .active-link::before {
+                content: '';
+                position: absolute;
+                bottom: -.75rem;
+                width: 4px;
+                height: 4px;
+                background-color: var(--first-color);
+                border-radius: 50%;
+            }
+
+            /* Minimalist design */
+            /* .active-link::before{
+      bottom: -.75rem;
+  } */
+        }
+
+        /* For large devices */
+        @media screen and (min-width: 1024px) {
+            .container {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+<!--=============== HEADER ===============-->
+<header class="header" id="header">
+    <nav class="nav container">
+        <a href="#about" class="nav__logo"><img
+                src="https://lh3.googleusercontent.com/ogw/ADea4I6JLvUvNYFZ2QQyYFSPKCA4ow1Zqy2J5-riuhTO=s32-c-mo"
+                alt="logo"></a>
+
+        <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <a href="#about" class="nav__link">
+                        <i class='bx bx-user nav__icon'></i>
+                        <span class="nav__name">About</span>
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#education" class="nav__link">
+                        <i class='bx bx-book-alt nav__icon'></i>
+                        <span class="nav__name">Education</span>
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#work-experience" class="nav__link">
+                        <i class='bx bx-briefcase-alt nav__icon'></i>
+                        <span class="nav__name">Work Experience</span>
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#technologies" class="nav__link">
+                        <i class='bx bx-briefcase-alt nav__icon'></i>
+                        <span class="nav__name">Technologies</span>
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#languages" class="nav__link">
+                        <i class='bx bx-briefcase-alt nav__icon'></i>
+                        <span class="nav__name">Languages</span>
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#contactme" class="nav__link">
+                        <i class='bx bx-message-square-detail nav__icon'></i>
+                        <span class="nav__name">Contact me</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </nav>
+</header>
+
+<main>
+    <!--=============== ABOUT ===============-->
+    <section class="container section section__height" id="about">
+        <h2 class="section__title">About</h2>
+        <div>
+            <p>
+                &emsp;My name is Catalin-Alexandru Popa, and I am an enthusiastic junior software developer. I have
+                the
+                official ANC certification, and I do consider myself ready to start a job within software
+                development area.
+            </p>
+            <p>
+                &emsp;I learned Java Fundamentals, Advanced, Software Testing, JDBC, Hibernate, Spring and HTML,
+                CSS,
+                JavaScript, Angular for front-end.
+            </p>
+            <p>
+                &emsp;About me, I can say I am a software development passionate ready to take on responsibilities. I
+                am
+                highly interested in expanding my knowledge, improving my skills and learning new technologies in
+                order to become a professional. I am eager to involve myself in a position in this field, to meet
+                experienced people from whom I can learn and grow.
+            </p>
+
+            <!-- Picture with me -->
+            <div style="text-align: center;">
+                <img src="https://i.ibb.co/5k52CxS/pictures.png" alt="personal-picture" width="450px">
+            </div>
+        </div>
+    </section>
+
+    <!--=============== Education ===============-->
+    <section class="container section section__height" id="education">
+        <h2 class="section__title">Education</h2>
+        <!--  -->
+        <div class="content">
+            <div>
+                <h1>
+                    <a style="color: #4583e0ad;">&emsp;Software Development Academy</a>
+                </h1>
+            </div>
+
+            <!-- Period of studies -->
+            <div>
+                    <span style="color: #4583e0ad; margin-left: 10px;"> Java from Scratch (327 hours) | Month 05 Year
+                        2019
+                        - Month 01 Year
+                        2020</span>
+            </div>
+
+            <!--  -->
+            <div>
+                <ul style="margin: 10px; margin-left: 50px;">
+                    <li>Java</li>
+                    <li>GIT</li>
+                    <li>Coding</li>
+                    <li>Software Testing - TDD</li>
+                    <li>Databases - SQL, NoSQL</li>
+                    <li>JDBC, Hibernate</li>
+                    <li>HTTP, Server Basics & HTML, CSS, JavaScript</li>
+                    <li>JSP and Servlets</li>
+                    <li>Introduction to JVM</li>
+                    <li>Spring Framework</li>
+                    <li>Scrum Methodology</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center;">
+                <!-- Projects -->
+                <div>
+                    <h1 style="color: #4583e0ad;">&emsp;Final project:</h1>
+                    <button style="width: 180px;"><a
+                            class="fa fa-github" target="_blanck"
+                            href="https://github.com/annormally/SSI-ServicesSubscriptionInvoice">
+                        ServicesSubscriptionInvoice</a></button>
+                </div>
+
+                <!-- Certification -->
+                <div>
+                    <h1 style="color: #4583e0ad;">&emsp;Certification:</h1>
+                    <button style="width: 180px;"><a
+                            class="fa fa-share-alt" target="_blanck"
+                            href="https://lh3.google.com/u/0/d/1nC9feyoxb2qT5yLIiumiZ1iUefiFqPCE=w1920-h687-iv1">
+                        ANC
+                        Certification</a></button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--=============== Work Education ===============-->
+    <section class=" container section section__height" id="work-experience">
+        <h2 class="section__title">Work Education</h2>
+        <div class="content">
+            <div>
+                <h3 style="color: #4583e0ad; margin-left: 10px;">Retail Sales Representative</h3>
+            </div>
+
+            <div>
+                <h5 style="color: #4583e0ad; margin-left: 20px;">Dedeman | Sep 2017 - Dec 2019</h5>
+            </div>
+
+            <ul style="margin: 10px; margin-left: 50px;">
+                <li>
+                    Provide accurate information (e.g. product features,pricing and after-sales services);
+                </li>
+                <li>
+                    Answer customers’ questions about specific products/services;
+                </li>
+                <li>
+                    Conduct price and feature comparisons to facilitate purchasing;
+                </li>
+                <li>
+                    Cross-sell products;
+                </li>
+                <li>
+                    Ensure racks are fully stockedManage returns of merchandise;
+                </li>
+                <li>
+                    Coordinate with the Retail Sales Representatives team to provide excellent customer service
+                    (especially
+                    during peak times);
+                </li>
+                <li>
+                    Inform customers about discounts and special offers;
+                </li>
+                <li>
+                    Provide customer feedback to the Direct Superior;
+                </li>
+                <li>
+                    Stay up-to-date with new products/services;
+                </li>
+            </ul>
+
+            <!-- Skills -->
+            <div>
+                <h5 style="color: #4583e0ad; margin-left: 20px;">Developed skills:</h5>
+            </div>
+
+            <div>
+                <ul style="margin: 10px; margin-left: 50px;">
+                    <li>Sales skills</li>
+                    <li>Communication skills</li>
+                    <li>Attention to details</li>
+                    <li>Customer care orientation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!--=============== Technologies ===============-->
+    <section class="container section section__height" id="technologies">
+        <h2 class="section__title">Technologies</h2>
+        <div class="content">
+            <ul style="margin: 10px; padding: 10px;">
+                <li>JDBC & HIBERNATE</li>
+                <li>Angular CLI</li>
+                <li>Spring</li>
+            </ul>
+        </div>
+    </section>
+
+    <!--=============== Languages ===============-->
+    <section class="container section section__height" id="languages">
+        <h2 class="section__title">Languages</h2>
+        <div>
+            <table class="blueTable">
+                <thead>
+                <tr>
+                    <th>Comprehension of the text heard</th>
+                    <th>Comprehension of the text read</th>
+                    <th>Production of written messages</th>
+                    <th>Production of oral messages</th>
+                    <th>Oral interaction</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>B1</td>
+                    <td>B2</td>
+                    <td>A2</td>
+                    <td>B1</td>
+                    <td>B1</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!--=============== CONTACT ME ===============-->
+    <section class="container section section__height" id="contactme">
+        <h2 class="section__title">Contact me</h2>
+        <div class="content">
+            <div class="fa fa-address-book-o text-format">
+                <p><span>Address:</span> Romania, Cluj, Campia Turzii, Dr.I.Ratiu nr.98A</p>
+            </div>
+            <div class="fa fa-mobile-phone text-format">
+                <p><span>Mobile Phone:</span> <a href="tel://+40 746 597 624">+40 746 597 624</a></p>
+            </div>
+            <div class="fa fa-send-o text-format">
+                <p><span>Email:</span> <a href="mailto:catalinpopa529@yahoo.com">catalinpopa529@yahoo.com</a></p>
+            </div>
+            <div class="fa fa-linkedin text-format">
+                <p><span>Linkedin:</span> <a
+                        href="https://www.linkedin.com/in/popa-catalin-alexandru-4915861a9/">Linkedin</a></p>
+            </div>
+            <div class="fa fa-github text-format">
+                <p><span>GitHub:</span> <a href="https://github.com/annormally">GitHub</a></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+        /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+        const sections = document.querySelectorAll('section[id]')
+
+        function scrollActive() {
+            const scrollY = window.pageYOffset
+
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight,
+                    sectionTop = current.offsetTop - 50,
+                    sectionId = current.getAttribute('id')
+
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
+                } else {
+                    document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
+                }
+            })
+        }
+        window.addEventListener('scroll', scrollActive)
+
+
+        /*=============== CHANGE BACKGROUND HEADER ===============*/
+        function scrollHeader() {
+            const header = document.getElementById('header')
+            // When the scroll is greater than 80 viewport height, add the scroll-header class to the header tag
+            if (this.scrollY >= 80) header.classList.add('scroll-header'); else header.classList.remove('scroll-header')
+        }
+        window.addEventListener('scroll', scrollHeader)
+
+
+
+
+</script>
+
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</body>
+
+</html>
